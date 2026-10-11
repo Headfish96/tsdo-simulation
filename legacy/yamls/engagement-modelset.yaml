@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: target-tracking
+  labels:
+    mission: engagement
+    model-set: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: target-tracking
+  template:
+    metadata:
+      labels:
+        app: target-tracking
+    spec:
+      containers:
+      - name: model
+        image: nginx:alpine
+        resources:
+          requests:
+            cpu: "150m"
+            memory: "128Mi"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: threat-assessment
+  labels:
+    mission: engagement
+    model-set: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: threat-assessment
+  template:
+    metadata:
+      labels:
+        app: threat-assessment
+    spec:
+      containers:
+      - name: model
+        image: nginx:alpine
+        resources:
+          requests:
+            cpu: "150m"
+            memory: "128Mi"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: strike-recommendation
+  labels:
+    mission: engagement
+    model-set: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: strike-recommendation
+  template:
+    metadata:
+      labels:
+        app: strike-recommendation
+    spec:
+      containers:
+      - name: model
+        image: nginx:alpine
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"

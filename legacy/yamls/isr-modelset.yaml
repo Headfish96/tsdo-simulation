@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: anomaly-detection
+  labels:
+    mission: isr
+    model-set: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anomaly-detection
+  template:
+    metadata:
+      labels:
+        app: anomaly-detection
+    spec:
+      containers:
+      - name: model
+        image: nginx:alpine
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pattern-analysis
+  labels:
+    mission: isr
+    model-set: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pattern-analysis
+  template:
+    metadata:
+      labels:
+        app: pattern-analysis
+    spec:
+      containers:
+      - name: model
+        image: nginx:alpine
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
